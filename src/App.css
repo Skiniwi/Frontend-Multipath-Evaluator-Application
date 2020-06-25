@@ -2,10 +2,100 @@
   text-align: center;
 }
 
-.App-header {
-  font-size: 20pt;
+.windowaddrequest  {
+  position: absolute;
+  top: 50pt;
+  left: 30pt;
+  width: 180pt;
+  height:40pt;
+  padding: 20pt;
+  z-index: 1001;
+  align-self: start;
+  background-color: rgba(66, 110, 88, 0);
 }
 
-.App-link {
-  color: #61dafb;
+.buttonaddrequest  {
+  position: relative;
+   width: 300pt;
+   height: relative;
+   left: -15pt;
+   bottom:20pt;
+  }
+
+
+.windowbutton  {
+  position: absolute;
+  top: 26pt;
+  left: 300pt;
+  width: 320pt;
+  height:0pt;
+  padding: 100px;
+  z-index: 1001;
+  align-self: start;
+  background-color: rgba(66, 110, 88, 0);
 }
+.button  {
+  position: relative;
+   width: 300pt;
+   height: relative;
+   left: -60pt;
+   bottom: 69pt;
+  }
+  .recharts-legend-item { font-size: 16pt; }
+
+  .headerdropdownitem{
+    text-align: center;
+    color: white;
+    font-size: 11pt;
+  }
+  .headerdropdownitemcdf{
+    left: -180pt;
+    position: relative;
+    bottom: 110pt;
+    text-align: center;
+    color: white;
+    font-size: 11pt;
+    background-color: rgba(61, 63, 62, 0.876);
+  }
+
+  .checkboxcdf{
+    left: -90pt;
+    position: relative;
+    bottom: 140pt;
+    text-align: center;
+    background-color:rgba(3, 75, 50, 0.876);
+    font-size: 11pt;
+  }
+  
+.window  {
+  position: absolute;
+  top: 30pt;
+  right: 0pt;
+  border: 1px black solid;
+  width: 400pt;
+  height: 95%;
+  padding: 100px;
+  border-radius: 4px;
+  box-shadow: 5px 5px 5px rgb(122, 120, 120);
+  z-index: 1001;
+  align-self: start;
+  background-color: rgba(66, 110, 88, 0.239);
+  overflow-y: scroll ;
+  overflow-x: hidden;
+}
+
+.chart  {
+ position: relative;
+width: 400pt;
+height: 240pt;
+right: 100pt;
+bottom: 50pt;
+  /* background-color: rgb(5, 170, 101); */
+}
+
+
+/* position: relative;
+width: 400pt;
+height: 240pt;
+right: 80pt;
+bottom: 50pt; */

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSubscription } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
-import Coordinates from "./coordinates";
-
+import Map from "./Map";
+import DropdownButtonEvaluation from "../Evaluation/ButtonEvaluation";
 
 const REQUESTS_SUBSCRIPTION = gql`
   subscription onResponseAdded($userID: String!) {
@@ -30,7 +30,8 @@ function RequestsSub() {
   });
   const [rxss, setRxss] = useState([]);
   const [tx, setTx] = useState([]);
-
+  const [pathss, setPathss] = useState([]);
+  // const [pointid, setPointid] = useState([]);
   useEffect(() => {
     if (
       !data ||
@@ -44,15 +45,17 @@ function RequestsSub() {
     const content = JSON.parse(data.responseAdded.content);
     setRxss(content.rxs_position)
     setTx(content.tx_position)
-
+    setPathss(content.paths)
+    // setPointid(content.point_id)
 
   }, [data]);
-
+  // console.log(pointid)
   return (
     <>
-
-      {loading && <div>Awaiting data</div>}
-      {<Coordinates tx={tx} rxss={rxss} />}
+      {console.log(loading)}
+      {/* {loading && alert("Please select a Point from the Map to have more options")} */}
+      {<DropdownButtonEvaluation pathss={pathss} />}
+      {<Map tx={tx} rxss={rxss} />}
     </>
   );
 }
