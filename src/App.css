@@ -22,80 +22,124 @@
    bottom:20pt;
   }
 
-
 .windowbutton  {
   position: absolute;
-  top: 26pt;
-  left: 300pt;
-  width: 320pt;
-  height:0pt;
+  top: -15pt;
+  left: 200pt;
+  width: 300pt;
+  height:220px;
   padding: 100px;
   z-index: 1001;
-  align-self: start;
-  background-color: rgba(66, 110, 88, 0);
+  background-color:  #5b5d5bab;
 }
 .button  {
   position: relative;
    width: 300pt;
    height: relative;
-   left: -60pt;
-   bottom: 69pt;
+   left: -69pt;
+   bottom: 75pt;
   }
-  .recharts-legend-item { font-size: 16pt; }
+  .buttonevaluation{
+    position: relative;
+    height: relative;
+    left: 90pt;
+    bottom: 80pt;
+  }
 
+.openandclosebuttonnav{
+  position: absolute;
+  top: 100pt;
+  left:80pt;
+}
+.nav_button{
+  width: 300pt;
+  height: 35pt;
+  top:-50pt;
+  left: 200pt;
+  background-color: #7a7878b2;
+  z-index: 1001;
+  }
+  .headernav{
+    text-align: left;
+    color: #ffffff;
+    font-size: 13pt;
+    white-space: nowrap;
+  }
+.btn_in_nav_button{
+  margin-left:auto;
+  margin-bottom: 1px;
+  padding: 10px;
+  z-index: 1001;
+}
+  .recharts-legend-item { font-size: 16pt; }
   .headerdropdownitem{
     text-align: center;
     color: white;
     font-size: 11pt;
   }
-  .headerdropdownitemcdf{
-    left: -180pt;
-    position: relative;
-    bottom: 110pt;
-    text-align: center;
-    color: white;
-    font-size: 11pt;
-    background-color: rgba(61, 63, 62, 0.876);
-  }
-
-  .checkboxcdf{
-    left: -90pt;
-    position: relative;
-    bottom: 140pt;
-    text-align: center;
-    background-color:rgba(3, 75, 50, 0.876);
-    font-size: 11pt;
-  }
-  
 .window  {
-  position: absolute;
-  top: 30pt;
-  right: 0pt;
-  border: 1px black solid;
-  width: 400pt;
-  height: 95%;
-  padding: 100px;
-  border-radius: 4px;
-  box-shadow: 5px 5px 5px rgb(122, 120, 120);
-  z-index: 1001;
-  align-self: start;
-  background-color: rgba(66, 110, 88, 0.239);
-  overflow-y: scroll ;
-  overflow-x: hidden;
+position: absolute;
+top: 29pt;
+right:0px;
+border: 1px rgba(0, 0, 0, 0) solid;
+width: 430pt;
+height: 95%;
+padding: 100px;
+border-radius: 10px;
+box-shadow: 5px 5px 5px #7a7878;
+z-index: 1001;
+align-self: start;
+background-color: rgba(66, 110, 88, 0);
+overflow-y: scroll ;
+overflow-x: scroll;
+}
+.window::-webkit-scrollbar { 
+display: none;  /* Safari and Chrome */
+}
+.window {
+-ms-overflow-style: none;  /* Internet Explorer 10+ */
+scrollbar-width: none;  /* Firefox */
 }
 
-.chart  {
- position: relative;
-width: 400pt;
-height: 240pt;
-right: 100pt;
+.openandclosechart{
+position: relative;
 bottom: 50pt;
-  /* background-color: rgb(5, 170, 101); */
+right: -25pt;
 }
 
 
-/* position: relative;
-width: 400pt;
-height: 240pt;
-right: 80pt;
-bottom: 50pt; */
+.arrow {
+  border: solid rgb(255, 255, 255);
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+
+}
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+.up {
+white-space: normal;
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+.btn_in_nav_chart{
+  margin-left:auto;
+  margin-bottom: 10px;
+}
+.chart  {
+  position: relative;
+  width: 390pt;
+  height: 300pt;
+  right: 80pt;
+  top: -6pt;
+  background-color: #5b5d5bab;
+  }
+  .nav{
+    width: 390pt;
+    right: 80pt;
+    background-color: #7a787885;
+    }
+
+ 

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import {
-    ScatterChart, Scatter, XAxis, YAxis, CartesianGrid,
-    Legend, ResponsiveContainer, Tooltip
+    ScatterChart, Scatter, XAxis, YAxis, CartesianGrid
+    , ResponsiveContainer, Tooltip
 } from 'recharts';
 import "../../App.css";
+import { Collapse, Button, Navbar, Spinner } from 'reactstrap';
+
 
 function Chart(props) {
     const [namescatter, setNameScatter] = useState('')
@@ -52,37 +54,75 @@ function Chart(props) {
             props.selectedValuey.slice(1, props.selectedValuey.length))
     }, [props.x, props.y, props.selectedValuex, props.selectedValuey]);
 
-
+    const [collapse, setCollapse] = useState(true);
+    const [status, setStatus] = useState(namescatter);
+    const onEntering = () => setStatus(<Spinner size="sm" color="light" />);
+    const onEntered = () => setStatus(namescatter);
+    const onExiting = () => setStatus(<Spinner size="sm" color="light" />)
+    const onExited = () => setStatus(namescatter);
+    const toggle = () => setCollapse(!collapse);
     return (
-        <div className="chart">
-            <ResponsiveContainer>
-                <ScatterChart
-                    width={500}
-                    height={400}
-                    margin={{
-                        top: 20, right: 20, bottom: 20, left: 20,
-                    }}
-                >
-                    <CartesianGrid />
-                    <XAxis type="number" dataKey={'x'} name={selectedValuex}
-                        style={{ fontSize: '0.8rem', fontFamily: 'Arial' }}
-                        stroke="white" axisLine={false}
-                        tickLine={false}
-                        tickCount={20}
 
-                    />
-                    <YAxis type="number" dataKey={'y'} name={selectedValuey}
-                        style={{ fontSize: '0.8rem', fontFamily: 'Arial' }}
-                        stroke="white" axisLine={false}
-                        tickLine={false}
-                        tickCount={20}
-                    />
-                    <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                    {selectedValuex && <Legend className="recharts-legend-item " wrapperStyle={{ top: 250, left: 50 }} name={namescatter} />}
-                    <Scatter name={namescatter} data={d} fill='#00ff00' />
-                </ScatterChart>
-            </ResponsiveContainer>
+
+        <div className="openandclosechart">
+            <Navbar className="nav" expand="sm">
+                <h5>{status}</h5>
+                <Button className="btn_in_nav_chart" size="sm" dark="true" onClick={toggle} >
+                    {collapse ? onExited && <i className="arrow up"></i> : <i className="arrow down"></i>}
+                </Button>
+            </Navbar>
+
+            <Collapse
+                isOpen={collapse}
+                onEntering={onEntering}
+                onEntered={onEntered}
+                onExiting={onExiting}
+                onExited={onExited}
+            >
+                <div className="chart">
+                    <ResponsiveContainer>
+                        <ScatterChart
+                            width={500}
+                            height={400}
+                            margin={{
+                                top: 20, right: 20, bottom: 20, left: 20,
+                            }}
+                        >
+                            <CartesianGrid />
+                            <XAxis type="number" dataKey={'x'} name={selectedValuex}
+                                style={{ fontSize: '0.8rem', fontFamily: 'Arial' }}
+                                stroke="white" axisLine={false}
+                                tickLine={false}
+                                tickCount={20}
+                                label={{
+                                    fontSize: '1.5rem', fontFamily: 'Arial', fill: '#ffffff',
+                                    value: selectedValuex, position: 'insideBottom', offset: -12
+                                }}
+
+                            />
+                            <YAxis type="number" dataKey={'y'} name={selectedValuey}
+                                style={{ fontSize: '0.8rem', fontFamily: 'Arial' }}
+                                stroke="white" axisLine={false}
+                                tickLine={false}
+                                tickCount={20}
+                                label={{
+                                    fontSize: '1.5rem', fontFamily: 'Arial', fill: '#ffffff',
+                                    value: selectedValuey, angle: -90, position: 'insideLeft'
+                                }}
+
+
+                            />
+                            <Tooltip wrapperStyle={{ backgroundColor: '#ccc' }} cursor={{ strokeDasharray: '3 3' }} />
+                            {/* {selectedValuex && <Legend className="recharts-legend-item " wrapperStyle={{ top: 360, left: 50 }} name={namescatter} />} */}
+                            <Scatter name={namescatter} data={d} fill='#00ff00' />
+                        </ScatterChart>
+                    </ResponsiveContainer>
+                </div>
+            </Collapse>
+
+
         </div>
+
     );
 }
 export default Chart;

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import "../../App.css";
 import {
     Input, FormGroup, DropdownToggle, DropdownMenu, DropdownItem,
-    InputGroupButtonDropdown, Navbar, ButtonDropdown
+    InputGroupButtonDropdown, Navbar, ButtonDropdown, Collapse, Button, Navbar
+
 } from 'reactstrap';
 
 function DropdownButtonEvaluationReceiver(props) {
@@ -30,45 +31,47 @@ function DropdownButtonEvaluationReceiver(props) {
             return null;
         });
     }
+
+    const [collapse, setCollapse] = useState(true);
+    const [status, setStatus] = useState('Opened');
+    const onEntering = () => setStatus('Opening...');
+    const onEntered = () => setStatus('Opened');
+    const onExiting = () => setStatus('Closing...');
+    const onExited = () => setStatus('Closed');
+    const toggle = () => setCollapse(!collapse);
+
+
     return (
-        <>
-            <Navbar dark expand="md">
-                <InputGroupButtonDropdown addonType="prepend" isOpen={splitButtonOpen} toggle={toggleSplit} >
-                    <ButtonDropdown isOpen={firstdropdownOpen} toggle={scenarios}>
-                        <DropdownToggle onClick={KeysFunction} caret> Evaluation</DropdownToggle>
-                        <DropdownMenu>
-                            <DropdownItem header>Select X Axis </DropdownItem>
-                            <FormGroup>
-                                <Input type="select" name='select' id="xSelect">
-                                    {key.length > 0 && key1.map(item => <option>{item}</option>)}
-                                </Input>
-                            </FormGroup>
-                            <DropdownItem header>Select Y Axis </DropdownItem>
-                            <FormGroup>
-                                <Input type="select" name="select" id="ySelect" multiple>
-                                    {key1.length > 0 && key.map(item => <option>{item}</option>)}
-                                </Input>
-                            </FormGroup>
-                            <DropdownItem divider />
-                            <DropdownItem>Start Evaluation</DropdownItem>
-                        </DropdownMenu>
-                    </ButtonDropdown>
-                </InputGroupButtonDropdown>
-            </Navbar>
-        </>
+
+
+        <Navbar dark expand="md">
+            <InputGroupButtonDropdown addonType="prepend" isOpen={splitButtonOpen} toggle={toggleSplit} >
+                <ButtonDropdown isOpen={firstdropdownOpen} toggle={scenarios}>
+                    <DropdownToggle onClick={KeysFunction} caret> Evaluation</DropdownToggle>
+                    <DropdownMenu>
+                        <DropdownItem header>Select X Axis </DropdownItem>
+                        <FormGroup>
+                            <Input type="select" name='select' id="xSelect">
+                                {key.length > 0 && key1.map(item => <option>{item}</option>)}
+                            </Input>
+                        </FormGroup>
+                        <DropdownItem header>Select Y Axis </DropdownItem>
+                        <FormGroup>
+                            <Input type="select" name="select" id="ySelect" multiple>
+                                {key1.length > 0 && key.map(item => <option>{item}</option>)}
+                            </Input>
+                        </FormGroup>
+                        <DropdownItem divider />
+                        <DropdownItem>Start Evaluation</DropdownItem>
+                    </DropdownMenu>
+                </ButtonDropdown>
+            </InputGroupButtonDropdown>
+        </Navbar>
+            </Collapse >
+
+
+        </div >
+
     );
 }
 export default DropdownButtonEvaluationReceiver;
-
-
-
-
-
-const [key2, setKey2] = useState([])
-const keypath2 = (path["interactions"][0]);
-if (path["interactions"][0] !== null) {
-
-    console.log(Object.keys(keypath2));
-    setKey2(keypath2);
-    return null;
-}

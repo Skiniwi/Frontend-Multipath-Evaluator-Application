@@ -25,13 +25,11 @@ const REQUESTS_SUBSCRIPTION = gql`
 
 function RequestsSub() {
 
-  const { data, loading } = useSubscription(REQUESTS_SUBSCRIPTION, {
+  const { data } = useSubscription(REQUESTS_SUBSCRIPTION, {
     variables: { userID: "web_raytracer" },
   });
-  const [rxss, setRxss] = useState([]);
+  const [points, setPoints] = useState([]);
   const [tx, setTx] = useState([]);
-  const [pathss, setPathss] = useState([]);
-  // const [pointid, setPointid] = useState([]);
   useEffect(() => {
     if (
       !data ||
@@ -43,19 +41,17 @@ function RequestsSub() {
       return;
     }
     const content = JSON.parse(data.responseAdded.content);
-    setRxss(content.rxs_position)
-    setTx(content.tx_position)
-    setPathss(content.paths)
-    // setPointid(content.point_id)
 
+    setPoints(content.points)
+    setTx(content.tx_position)
   }, [data]);
-  // console.log(pointid)
+
+
   return (
     <>
-      {console.log(loading)}
       {/* {loading && alert("Please select a Point from the Map to have more options")} */}
-      {<DropdownButtonEvaluation pathss={pathss} />}
-      {<Map tx={tx} rxss={rxss} />}
+      {<DropdownButtonEvaluation points={points} />}
+      {<Map tx={tx} points={points} />}
     </>
   );
 }
