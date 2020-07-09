@@ -6,8 +6,6 @@ import {
   ButtonDropdown
 } from 'reactstrap';
 
-
-
 const ADD_REQUEST = gql`
   mutation createRequest($content: String!, $serviceID: String!) {
     createRequest(
@@ -32,7 +30,6 @@ function AddRequest() {
     });
   };
 
-
   //Down Button for Select Scenario
   const [firstdropdownOpen, setFirstDropdownOpen] = useState(false);
   const scenarios = () => setFirstDropdownOpen(!firstdropdownOpen);
@@ -40,10 +37,6 @@ function AddRequest() {
   const altair = () => setSecondDropdownOpen(!seconddropdownOpen);
   const [thirddropdownOpen, setThirdDropdownOpen] = useState(false);
   const matlab = () => setThirdDropdownOpen(!thirddropdownOpen);
-
-
-
-
   return (
     <>
       <div className="windowaddrequest" >

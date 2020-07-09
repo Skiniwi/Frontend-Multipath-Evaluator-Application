@@ -34,11 +34,19 @@
 }
 .button  {
   position: relative;
-   width: 300pt;
-   height: relative;
-   left: -69pt;
+   left: -70pt;
    bottom: 75pt;
   }
+  .buttonx  {
+    position: relative;
+     left: -69pt;
+     bottom: 77pt;
+    }
+  .btn_in_window_evaluation{
+    padding: 10px;
+    width: 185px;
+    height: auto;
+    }
   .buttonevaluation{
     position: relative;
     height: relative;
@@ -71,12 +79,14 @@
   padding: 10px;
   z-index: 1001;
 }
+
   .recharts-legend-item { font-size: 16pt; }
   .headerdropdownitem{
     text-align: center;
     color: white;
     font-size: 11pt;
   }
+
 .window  {
 position: absolute;
 top: 29pt;
@@ -125,7 +135,14 @@ white-space: normal;
   -webkit-transform: rotate(-135deg);
 }
 .btn_in_nav_chart{
-  margin-left:auto;
+  position: relative;
+  height: 32px;
+  width: 24pt;
+  margin-left:auto ;
+  margin-bottom: 10px;
+}
+.trash_btn{
+  margin-left:5px;
   margin-bottom: 10px;
 }
 .chart  {
@@ -142,4 +159,15 @@ white-space: normal;
     background-color: #7a787885;
     }
 
+    
+    .pointeval{
+      position: relative;
+      top: 300pt;
+      left: 10pt;
+      width: 300pt;
+      height:220px;
+      padding: 100px;
+      z-index: 1001;
+      background-color:  #5b5d5bab;
+    }
  

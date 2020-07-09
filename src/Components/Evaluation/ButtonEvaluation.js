@@ -5,28 +5,31 @@ import {
     Navbar, Collapse, Spinner
 
 } from 'reactstrap';
-import Chart from "./Chart ";
-import ChartCdf from "./ChartCdf";
 import uuid from 'react-uuid';
-
+import Chart from "./Chart";
+import Evaluation from "../Evaluation/Evaluation";
 
 function DropdownButtonEvaluation(props) {
     //Split Down Button for Evaluation
     const paths = []
     const [points, setPoints] = useState([]);
-
+    const [id, setIdPoint] = useState(null);
     useEffect(() => {
         if (!props.points) {
             return
         }
         setPoints(props.points);
-    }, [props.points]);
+        setIdPoint(props.idd)
 
+    }, [props.points, props.idd]);
     points.map(function (item) {
-        paths.push(item.paths);
-        return null
-
+        if (id === item.point_id) {
+            paths.push(item.paths)
+            return null
+        }
     })
+
+
     const [key1, setKey1] = useState([])
     const [key2, setKey2] = useState([])
 
@@ -50,6 +53,7 @@ function DropdownButtonEvaluation(props) {
             });
 
         });
+
     }
 
     const [selectedValuex, setSelectedValuex] = useState('aoa')
@@ -58,24 +62,24 @@ function DropdownButtonEvaluation(props) {
     function handleChangey(event) { setSelectedValuey(event.target.value) }
     const x = []
     const y = []
+    const [returnn, setReturnn] = useState(false)
+    const ignorekeys = ["position", "material_id", "interaction_type", "interactions", "interacted_obj_id", "num_of_interactions", "type_of_path"]
+    const clearStateAlert = () => setReturnn(false); if (returnn === true) { alert("Please select another option from the drop down !"); clearStateAlert() }
+    const returnnn = () => { setReturnn(true); return }
     function xFunction() {
         paths.forEach(function (item) {
             item.forEach(function (path) {
                 if (keypath1.includes(selectedValuex)) {
                     path.interactions.forEach(j => {
-                        if (selectedValuex === "aoa" || "aod" || "material_id" || "interacted_obj_id") {
-                            x.push(j[selectedValuex])
-                        }
-                        else {
-                            console.log("hi")
+                        x.push(j[selectedValuex])
+                        if (ignorekeys.includes(selectedValuex)) {
+                            returnnn()
                         }
                     });
                 }
-                if (selectedValuex === "power" || "num_of_interactions" || "field_strength" || "delay") {
-                    x.push(path[selectedValuex])
-                }
-                else {
-                    console.log("hello")
+                x.push(path[selectedValuex])
+                if (ignorekeys.includes(selectedValuex)) {
+                    returnnn()
                 }
             });
         });
@@ -88,84 +92,85 @@ function DropdownButtonEvaluation(props) {
                         if (selectedValuey !== ("position" || "interacted_obj_id" || "material_id" || "interaction_type")) {
                             y.push(j[selectedValuey])
                         }
-                        else {
-                            console.log("Hi")
+                        if (ignorekeys.includes(selectedValuey)) {
+                            returnnn()
                         }
                     });
                 }
                 if (selectedValuey !== "num_of_interactions" || "type_of_path") {
                     y.push(path[selectedValuey])
                 }
-                else {
-                    console.log("Hi")
+                if (ignorekeys.includes(selectedValuey)) {
+                    returnnn()
                 }
             });
         });
+
     }
 
-    const [charts, setCharts] = useState([])
-    function createNewChart() {
-        setCharts(p => [...p, {
+    const [selectedchart, setSelectedchart] = useState("CDF Chart")
+    function handleChangetypeofchart(event) { setSelectedchart(event.target.value) }
+    // const choosechart = () => { selectedchart === "CDF Chart" ? createNewChartCdf() : createNewChart() }
+    const [collapse, setCollapse] = useState(true);
+    const [status, setStatus] = useState('Evaluation ');
+    const onOpening = () => setStatus(<Spinner size="sm" color="light" />);
+    const onOpen = () => setStatus('Evaluation Window');
+    const onClosing = () => setStatus(<Spinner size="sm" color="light" />)
+    const onClosed = () => setStatus('Click to Evaluate');
+    const toggle = () => setCollapse(!collapse);
+
+
+
+    let [newchart, setNewchart] = useState([])
+    function createNewNewChart() {
+        setNewchart(p => [...p, {
+            selectedchart,
             x,
             y,
             selectedValuex,
-            selectedValuey
-        }]);
-        return null
-    }
-    const [chartscdf, setChartsCdf] = useState([])
-    function createNewChartCdf() {
-        setChartsCdf(p => [...p, {
-            x,
-            selectedValuex,
-        }]);
-        return null
-    }
+            selectedValuey,
 
-    const [selectedchart, setSelectedchart] = useState('CDF Chart')
-    function handleChangetypeofchart(event) { setSelectedchart(event.target.value) }
-    const choosechart = () => { selectedchart === "CDF Chart" ? createNewChartCdf() : createNewChart() }
-    const [collapse, setCollapse] = useState(true);
-    const [status, setStatus] = useState('Evaluation ');
-    const onEntering = () => setStatus(<Spinner size="sm" color="light" />);
-    const onEntered = () => setStatus('Evaluation Window');
-    const onExiting = () => setStatus(<Spinner size="sm" color="light" />)
-    const onExited = () => setStatus('Click to Evaluate');
-    const toggle = () => setCollapse(!collapse);
+        }]);
+    }
+    //This function create a duplicate of newchart in copyNewchart after delete the selected object using the index after reset the newchart
+    const deleteChart = (index) => {
+        const copyNewchart = Object.assign([], newchart);
+        copyNewchart.splice(index, 1);
+        setNewchart(newchart = copyNewchart)
+    };
 
     return (
         <>
-            <div className="openandclosebuttonnav">
+            <div id={uuid()} className="openandclosebuttonnav">
                 <Navbar className="nav_button" expand="sm">
                     <div className="headernav" > {status}</div>
                     <Button className="btn_in_nav_button" size="sm" dark="true" onClick={toggle} >
-                        {collapse ? onExited && <i className="arrow up"></i> : <i className="arrow down"></i>}
+                        {collapse ? onClosed && <i className="arrow up"></i> : <i className="arrow down"></i>}
                     </Button>
                 </Navbar>
                 <Collapse
                     isOpen={collapse}
-                    onEntering={onEntering}
-                    onEntered={onEntered}
-                    onExiting={onExiting}
-                    onExited={onExited}
+                    onEntering={onOpening}
+                    onEntered={onOpen}
+                    onExiting={onClosing}
+                    onExited={onClosed}
                 >
                     <div className="windowbutton" >
                         <ButtonGroup className="button" size="sm">
                             <FormGroup onClick={KeysFunction}>
                                 <DropdownItem header> <div className="headerdropdownitem" >Select type of chart </div > </DropdownItem>
-                                <Input type="select" name="select" id="selectchart" defaultChecked
+                                <Input className="btn_in_window_evaluation" type="select" name="select" id="selectchart" defaultChecked
                                     value={selectedchart} onChange={handleChangetypeofchart} >
                                     <option >CDF Chart</option>
                                     <option >Scatter Chart</option>
-
                                 </Input>
                             </FormGroup>
                         </ButtonGroup>
 
-                        <ButtonGroup className="button" size="sm">
+                        <ButtonGroup className="buttonx" size="sm">
                             <FormGroup onClick={KeysFunction}>
                                 <DropdownItem header ><div className="headerdropdownitem" >Select X Axis </div ></DropdownItem>
-                                <Input type="select" name='select' id="xSelect" defaultChecked
+                                <Input className="btn_in_window_evaluation" type="select" name='select' id="xSelect" defaultChecked
                                     value={selectedValuex} onChange={handleChangex} >
                                     {key1.length > 0 && key1.map((item1, index1) => <option key={index1} >{item1}</option>)}
                                 </Input>
@@ -173,7 +178,7 @@ function DropdownButtonEvaluation(props) {
 
                             {selectedchart === "Scatter Chart" ? < FormGroup onClick={KeysFunction}>
                                 <DropdownItem header><div className="headerdropdownitem" >Select Y Axis </div > </DropdownItem>
-                                <Input type="select" name="select" id="ySelect" defaultChecked
+                                <Input className="btn_in_window_evaluation" type="select" name="select" id="ySelect" defaultChecked
                                     value={selectedValuey} onChange={handleChangey} >
                                     {key2.length > 0 && key2.map((item, index) => <option key={index} >{item}</option>)}
                                 </Input>
@@ -182,7 +187,7 @@ function DropdownButtonEvaluation(props) {
 
                         <ButtonGroup className="buttonevaluation" size="sm">
                             <FormGroup>
-                                <Button onClick={() => { choosechart(); yFunction(); xFunction(); }} >Start Evaluation</Button>
+                                <Button onClick={() => { yFunction(); xFunction(); createNewNewChart() }} >Start Evaluation</Button>
                             </FormGroup>
                         </ButtonGroup>
                     </div>
@@ -190,12 +195,9 @@ function DropdownButtonEvaluation(props) {
             </div>
 
             <div className="window">
-
-                {charts.map(({ x, y, selectedValuex, selectedValuey }, index) => (
-                    <Chart key={uuid()} x={x} y={y} selectedValuex={selectedValuex} selectedValuey={selectedValuey} />
-                ))}
-                {chartscdf.map(({ x, selectedValuex }) => (
-                    <ChartCdf key={uuid()} x={x} selectedValuex={selectedValuex} />
+                {newchart.length > 0 && newchart.map(({ x, y, selectedValuex, selectedValuey, selectedchart }, index) => (
+                    <Chart key={uuid()} x={x} y={y} selectedValuex={selectedValuex}
+                        selectedValuey={selectedValuey} selectedchart={selectedchart} deleteChart={() => deleteChart(index)} />
                 ))}
             </div>
         </>
