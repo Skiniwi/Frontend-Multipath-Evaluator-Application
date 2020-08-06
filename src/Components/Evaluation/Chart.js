@@ -1,7 +1,6 @@
 import {
     Button,
     Navbar, Collapse, Spinner
-
 } from 'reactstrap';
 import React, { useEffect, useState } from "react";
 import cdf from 'cumulative-distribution-function';
@@ -12,13 +11,41 @@ import {
 import "../../App.css";
 import uuid from 'react-uuid';
 
-
 function Chart(props) {
     const [dCdf, setDCdf] = useState([])
     const [d, setD] = useState([])
-
     const [y, setYarray] = useState([])
     const [x, setXarray] = useState([])
+    const [namey, setNamey] = useState("")
+    const [dataKey, setDataKey] = useState("")
+    const [valuey, setValuey] = useState("")
+    const [namescatterr, setNamescatterr] = useState("")
+    const [datachart, setDatachart] = useState([])
+    const [domain, setDomain] = useState()
+    const [selectedchart, setSelectedchart] = useState('')
+    const [namescatter, setNameScatter] = useState('')
+    const [nameScatterCdf, setNameScatterCdf] = useState('')
+    const [selectedValuex, setSelectedValuex] = useState('')
+    const [selectedValuey, setSelectedValuey] = useState('')
+    const [collapse, setCollapse] = useState(true);
+    const [status, setStatus] = useState(namescatterr);
+    useEffect(() => {
+        if (selectedchart === "Scatter Chart") {
+            setDataKey("y");
+            setNamey(selectedValuey);
+            setValuey(selectedValuey);
+            setNamescatterr(namescatter);
+            setDatachart(d)
+        }
+        else if (selectedchart === "CDF Chart") {
+            setDataKey("yCdf");
+            setNamey("Cdf");
+            setValuey("Cdf");
+            setNamescatterr(nameScatterCdf);
+            setDatachart(dCdf);
+            setDomain([0, 1])
+        }
+    }, [selectedchart, selectedValuey, namescatter, d, nameScatterCdf, dCdf])
 
     useEffect(() => {
         const arrayChart = [];
@@ -34,11 +61,7 @@ function Chart(props) {
         const array = cdfx.map((v, i) => ({ 'x': v, 'yCdf': cdfy[i] }));
         setDCdf(array)
     }, [x])
-    const [selectedchart, setSelectedchart] = useState('')
-    const [namescatter, setNameScatter] = useState('')
-    const [nameScatterCdf, setNameScatterCdf] = useState('')
-    const [selectedValuex, setSelectedValuex] = useState('')
-    const [selectedValuey, setSelectedValuey] = useState('')
+
     useEffect(() => {
         if (!props.x) {
             return
@@ -64,41 +87,13 @@ function Chart(props) {
             props.selectedValuex.slice(1, props.selectedValuex.length) + '/cdf')
 
     }, [props.x, props.y, props.selectedValuex, props.selectedValuey, props.selectedchart]);
-
-    const [collapse, setCollapse] = useState(true);
-    const [status, setStatus] = useState(namescatter);
     const onEntering = () => setStatus(<Spinner size="sm" color="light" />);
-    const onEntered = () => setStatus(namescatter);
+    const onEntered = () => setStatus(namescatterr);
     const onExiting = () => setStatus(<Spinner size="sm" color="light" />)
-    const onExited = () => setStatus(namescatter);
+    const onExited = () => setStatus(namescatterr);
     const toggle = () => setCollapse(!collapse);
-    const [namey, setNamey] = useState("")
-    const [dataKey, setDataKey] = useState("")
-    const [valuey, setValuey] = useState("")
-    const [namescatterr, setNamescatterr] = useState("")
-    const [datachart, setDatachart] = useState([])
-    const [domain, setDomain] = useState()
-
-    useEffect(() => {
-        if (selectedchart === "Scatter Chart") {
-            setDataKey("y");
-            setNamey(selectedValuey);
-            setValuey(selectedValuey);
-            setNamescatterr(namescatter);
-            setDatachart(d)
-        }
-        else if (selectedchart === "CDF Chart") {
-            setDataKey("yCdf");
-            setNamey("Cdf");
-            setValuey("Cdf");
-            setNamescatterr(nameScatterCdf);
-            setDatachart(dCdf);
-            setDomain([0, 1])
-        }
-
-    }, [selectedchart, selectedValuey, namescatter, d, nameScatterCdf, dCdf])
-
     const deleteChart = () => props.deleteChart(props.index)
+
     return (
         <>
             <div id={uuid()} className="openandclosechart">
@@ -122,10 +117,10 @@ function Chart(props) {
                     <div className="chart">
                         <ResponsiveContainer >
                             <ScatterChart
-                                width={500}
+                                width={450}
                                 height={400}
                                 margin={{
-                                    top: 20, right: 20, bottom: 20, left: 20,
+                                    top: 20, right: 20, bottom: 30, left: 20,
                                 }}
                             >
                                 <CartesianGrid />
@@ -148,7 +143,7 @@ function Chart(props) {
                                     domain={domain}
                                     label={{
                                         fontSize: '1.5rem', fontFamily: 'Arial', fill: '#ffffff',
-                                        value: valuey, angle: -90, position: 'insideLeft'
+                                        value: valuey, angle: -90, position: 'left', dy: -70
                                     }} />
                                 <Tooltip wrapperStyle={{ backgroundColor: '#ccc' }} cursor={{ strokeDasharray: '3 3' }} />
                                 {/* {selectedValuex && <Legend className="recharts-legend-item " wrapperStyle={{ top: 360, left: 50 }} name={namescatter} />} */}

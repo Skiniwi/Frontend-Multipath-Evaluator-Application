@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useSubscription } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import Map from "./Map";
-import DropdownButtonEvaluation from "../Evaluation/ButtonEvaluation";
 import Evaluation from "../Evaluation/Evaluation";
 
 // const id = require('./Map');
@@ -42,23 +41,23 @@ function RequestsSub() {
     ) {
       return;
     }
-    const content = JSON.parse(data.responseAdded.content);
-
+    const content = JSON.parse(data.responseAdded.content)
     setPoints(content.points)
     setTx(content.tx_position)
   }, [data]);
   const [idd, setIdd] = useState(null);
-
+  const [calculateddata, setCalculateddataa] = useState({});
   const parent = (id) => {
-    setIdd(id) // const idCopy = Object.assign([], id);
+    setIdd(id)
   }
-  console.log(idd)
+  const evaluation = (calculateddataa) => {
+    setCalculateddataa(calculateddataa)
+  }
   return (
     <>
       {/* {loading && alert("Please select a Point from the Map to have more options")} */}
-      {<DropdownButtonEvaluation idd={idd} tx={tx} points={points} />}
-      {<Map tx={tx} points={points} parentt={parent} />}
-      {/* {<Evaluation tx={tx} points={points} />} */}
+      {<Evaluation idd={idd} tx={tx} points={points} evaluationn={evaluation} />}
+      {<Map tx={tx} points={points} parentt={parent} calculateddata={calculateddata} />}
     </>
   );
 }

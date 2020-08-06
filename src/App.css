@@ -1,136 +1,92 @@
-.App {
-  text-align: center;
-}
-
+.App { text-align: center;}
 .windowaddrequest  {
   position: absolute;
-  top: 50pt;
-  left: 30pt;
-  width: 180pt;
-  height:40pt;
-  padding: 20pt;
+  top: 40pt;
+  left: 35pt;
+  z-index: 1001;
+}
+.savebutton{
+  position: relative;
+  top:-60pt;
+  left: 370px;
+  width: 0px;
+}
+.openandclosebuttonnav{
+    position: absolute;
+    top: 195pt;
+    left:-196pt;
+    z-index: 1001;
+    width: 25%;
+  }
+.nav_button{
+    top:-50pt;
+    left: 205pt;
+    background-color: #7a7878b2;
+    }
+.headernav{
+  color: #ffffff;
+  font-size: 13pt;
+    }
+.btn_in_nav_button{margin-left:auto;}
+.windowbutton  {
+  position: relative;
+  top: -50.5pt;
+  right:-205pt;
+  background-color:  #5b5d5b8c;
+  height: 180pt;
+}
+.button  {position: relative;}
+.buttonx  { position: relative; }
+.buttonevaluation{
+  position: relative;
+  margin-left:auto ;
+  margin-bottom: -7%;
+  }
+.recharts-legend-item { font-size: 16pt; }
+.headerdropdownitem{
+  text-align: center;
+  color: white;
+  font-size: 11pt;
+  }
+.window  {
+  position: absolute;
+  top: 29pt;
+  right:0px;
+  border: 1px rgba(0, 0, 0, 0) solid;
+  width: 32%;
+/* max-width: 75px; */
+  height: 95%;
+  padding: 100px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px #7a787800;
   z-index: 1001;
   align-self: start;
   background-color: rgba(66, 110, 88, 0);
+  overflow-y: scroll ;
+  overflow-x: scroll;
 }
-
-.buttonaddrequest  {
-  position: relative;
-   width: 300pt;
-   height: relative;
-   left: -15pt;
-   bottom:20pt;
-  }
-
-.windowbutton  {
-  position: absolute;
-  top: -15pt;
-  left: 200pt;
-  width: 300pt;
-  height:220px;
-  padding: 100px;
-  z-index: 1001;
-  background-color:  #5b5d5bab;
-}
-.button  {
-  position: relative;
-   left: -70pt;
-   bottom: 75pt;
-  }
-  .buttonx  {
-    position: relative;
-     left: -69pt;
-     bottom: 77pt;
-    }
-  .btn_in_window_evaluation{
-    padding: 10px;
-    width: 185px;
-    height: auto;
-    }
-  .buttonevaluation{
-    position: relative;
-    height: relative;
-    left: 90pt;
-    bottom: 80pt;
-  }
-
-.openandclosebuttonnav{
-  position: absolute;
-  top: 100pt;
-  left:80pt;
-}
-.nav_button{
-  width: 300pt;
-  height: 35pt;
-  top:-50pt;
-  left: 200pt;
-  background-color: #7a7878b2;
-  z-index: 1001;
-  }
-  .headernav{
-    text-align: left;
-    color: #ffffff;
-    font-size: 13pt;
-    white-space: nowrap;
-  }
-.btn_in_nav_button{
-  margin-left:auto;
-  margin-bottom: 1px;
-  padding: 10px;
-  z-index: 1001;
-}
-
-  .recharts-legend-item { font-size: 16pt; }
-  .headerdropdownitem{
-    text-align: center;
-    color: white;
-    font-size: 11pt;
-  }
-
-.window  {
-position: absolute;
-top: 29pt;
-right:0px;
-border: 1px rgba(0, 0, 0, 0) solid;
-width: 430pt;
-height: 95%;
-padding: 100px;
-border-radius: 10px;
-box-shadow: 5px 5px 5px #7a7878;
-z-index: 1001;
-align-self: start;
-background-color: rgba(66, 110, 88, 0);
-overflow-y: scroll ;
-overflow-x: scroll;
-}
-.window::-webkit-scrollbar { 
-display: none;  /* Safari and Chrome */
-}
+.window::-webkit-scrollbar { display: none;  /* Safari and Chrome */}
 .window {
--ms-overflow-style: none;  /* Internet Explorer 10+ */
-scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
 }
-
 .openandclosechart{
-position: relative;
-bottom: 50pt;
-right: -25pt;
+  position: relative;
+  bottom: 50pt;
+  right: -25pt;
 }
-
-
 .arrow {
   border: solid rgb(255, 255, 255);
   border-width: 0 3px 3px 0;
   display: inline-block;
   padding: 3px;
-
 }
 .down {
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
 }
 .up {
-white-space: normal;
+  white-space: normal;
   transform: rotate(-135deg);
   -webkit-transform: rotate(-135deg);
 }
@@ -153,21 +109,26 @@ white-space: normal;
   top: -6pt;
   background-color: #5b5d5bab;
   }
-  .nav{
-    width: 390pt;
-    right: 80pt;
-    background-color: #7a787885;
+.nav{
+  width: 390pt;
+  right: 80pt;
+  background-color: #7a787885;
     }
-
-    
-    .pointeval{
-      position: relative;
-      top: 300pt;
-      left: 10pt;
-      width: 300pt;
-      height:220px;
-      padding: 100px;
-      z-index: 1001;
-      background-color:  #5b5d5bab;
+.pointeval{
+  position: relative;
+  top: 300pt;
+  left: 10pt;
+  width: 300pt;
+  height:220px;
+  padding: 100px;
+  z-index: 1001;
+  background-color:  #5b5d5bab;
     }
- 
+.popup{
+  height: 125px;
+  border-radius: 10px;
+  z-index: 1001;
+  align-self: start;
+  overflow-y:scroll ;
+    }
+.popup::-webkit-scrollbar { display: none;  /* Safari and Chrome */}

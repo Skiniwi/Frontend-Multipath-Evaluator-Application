@@ -5,22 +5,22 @@ import {
   Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Navbar, Button, ButtonGroup,
   ButtonDropdown
 } from 'reactstrap';
-
 const ADD_REQUEST = gql`
-  mutation createRequest($content: String!, $serviceID: String!) {
-    createRequest(
-      input: {
-        contentType: "application/json"
-        serviceID: $serviceID
-        content: $content
-        acceptContentType: "application/json"
-        forceUpdate: true
-      }
-    ) {
-      id
-      status
+mutation createRequest($content: String!, $serviceID: String!) {
+  createRequest(
+    input: {
+      contentType: "application/json"
+      serviceID: $serviceID
+      content: $content
+      acceptContentType: "application/json"
+      forceUpdate: true
     }
+  ) {
+    id
+    status
   }
+}
+  
 `;
 function AddRequest() {
   const [addRequest] = useMutation(ADD_REQUEST);
@@ -29,7 +29,6 @@ function AddRequest() {
       variables: { serviceID: "service_sum", content: "sudo" },
     });
   };
-
   //Down Button for Select Scenario
   const [firstdropdownOpen, setFirstDropdownOpen] = useState(false);
   const scenarios = () => setFirstDropdownOpen(!firstdropdownOpen);
@@ -40,15 +39,13 @@ function AddRequest() {
   return (
     <>
       <div className="windowaddrequest" >
-        <Navbar className="buttonaddrequest" dark expand="md">
+        <Navbar dark expand="md">
           <ButtonGroup size="sm">
-            <Button onClick={handleAddRequest}>Quick test</Button>
-
+            <Button onClick={handleAddRequest}>  Quick test</Button>
             <ButtonDropdown isOpen={firstdropdownOpen} toggle={scenarios}>
               <DropdownToggle caret> Scenarios</DropdownToggle>
               <DropdownMenu>
-
-                <Dropdown size="sm" direction="left" isOpen={seconddropdownOpen} toggle={altair}>
+                <Dropdown size="sm" direction="right" isOpen={seconddropdownOpen} toggle={altair}>
                   <DropdownToggle caret>Altair Scenario</DropdownToggle>
                   <DropdownMenu>
                     <DropdownItem onClick={handleAddRequest}>Leipzig</DropdownItem>
@@ -62,7 +59,6 @@ function AddRequest() {
                     <DropdownItem>Bonn</DropdownItem>
                   </DropdownMenu>
                 </Dropdown>
-
               </DropdownMenu>
             </ButtonDropdown>
           </ButtonGroup>
@@ -72,5 +68,4 @@ function AddRequest() {
     </>
   );
 }
-
 export default AddRequest;

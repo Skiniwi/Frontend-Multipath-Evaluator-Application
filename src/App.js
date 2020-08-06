@@ -8,21 +8,16 @@ import AddRequest from "./Components/Map/AddRequest";
 function App() {
   return (
     <ApolloProvider client={GqlClient}>
-
       <div className="App">
         <header className="App-header">Multipath Evaluator APP</header>
         <div>
           <AddRequest />
         </div>
-
         <div>
           <RequestsSub />
         </div>
-
       </div>
     </ApolloProvider >
-
   );
 }
-
 export default App;
