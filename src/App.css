@@ -1,9 +1,24 @@
 .App { text-align: center;}
+
+.btn_in_window_evaluation{
+  background-color: #8e9399;
+}
+.form-control:focus {
+  color: #ffffff;
+  background-color: #8e9399;}
+  
 .windowaddrequest  {
   position: absolute;
-  top: 40pt;
-  left: 35pt;
+  top: 50pt;
+  left: 20pt;
   z-index: 1001;
+}
+.windowaddrequest1 {
+  position: absolute;
+  top: 60pt;
+  left: 48pt;
+  z-index: 1001;
+  width: 121pt;
 }
 .savebutton{
   position: relative;
@@ -11,17 +26,46 @@
   left: 370px;
   width: 0px;
 }
-.openandclosebuttonnav{
+
+.openandclosebuttonnavrequest{
+  position: absolute;
+  top:30pt;
+  left:-220pt;
+  z-index: 1001;
+  width: 130pt;
+}
+.nav_button1{
+  top:-50pt;
+  left: 205pt;
+  width: 150pt;
+  background-color: #6c757d;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  }
+.headernav1{
+color: #ffffff;
+font-size: 13pt;
+  }
+  .btn_in_nav_button1{margin-left:auto;}
+
+  .openandclosebuttonnav{
     position: absolute;
-    top: 195pt;
-    left:-196pt;
+    top: 290pt;
+    left:-200pt;
     z-index: 1001;
     width: 25%;
   }
+
 .nav_button{
     top:-50pt;
     left: 205pt;
-    background-color: #7a7878b2;
+    background-color: #6c757d;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
     }
 .headernav{
   color: #ffffff;
@@ -33,7 +77,7 @@
   top: -50.5pt;
   right:-205pt;
   background-color:  #5b5d5b8c;
-  height: 180pt;
+  height: 220pt;
 }
 .button  {position: relative;}
 .buttonx  { position: relative; }
@@ -43,6 +87,38 @@
   margin-bottom: -7%;
   }
 .recharts-legend-item { font-size: 16pt; }
+  
+.getscenario{
+  position: absolute;
+  text-align: center;
+  color: white;
+  font-size: 11pt;
+  height: 186px;
+  width: 150pt;
+  overflow-y: scroll ;
+  overflow-x: scroll;
+  background-color: #7a787885;
+  top: -50pt;
+  right:-225pt;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  }
+  .getscenario::-webkit-scrollbar { display: none;  /* Safari and Chrome */}
+  .getscenario {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+
+  .buttomgetscenario{
+    position: absolute;
+    width: 121pt;
+    top: -49.5pt;
+    left: 356pt;
+    z-index: 1001;
+   
+    }
+
 .headerdropdownitem{
   text-align: center;
   color: white;
@@ -106,8 +182,8 @@
   width: 390pt;
   height: 300pt;
   right: 80pt;
-  top: -6pt;
-  background-color: #5b5d5bab;
+  top: 0pt;
+  background-color: #8f998fab;
   }
 .nav{
   width: 390pt;
@@ -132,3 +208,10 @@
   overflow-y:scroll ;
     }
 .popup::-webkit-scrollbar { display: none;  /* Safari and Chrome */}
+
+
+.selectallpoints{
+  position: relative;
+  top: 20pt;
+}
+

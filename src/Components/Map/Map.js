@@ -9,6 +9,7 @@ import {
 import image from "./icons/image.svg";
 import Marker from 'react-leaflet-enhanced-marker';
 import * as turf from "@turf/turf";
+// import { LassoControl } from "leaflet-lasso";
 
 const Leipzig = [51.315579, 12.377772]
 const Map = (props) => {
@@ -16,6 +17,8 @@ const Map = (props) => {
     const [id, setId] = useState(null);
     const [calculateddata, setCalculateddataa] = useState({});
     const [transmitter, setTransmitter] = useState([]);
+    const [txinfo, setTxInfo] = useState([]);
+
     useEffect(() => {
         if (!props.points) {
             return
@@ -24,10 +27,10 @@ const Map = (props) => {
         setReceivers(props.points);
         setTransmitter(props.tx);
         setCalculateddataa(props.calculateddata);
-    }, [props.tx, props.points, props.parent, props.calculateddata]);
+        setTxInfo(props.txinfo)
+    }, [props.tx, props.points, props.parent, props.calculateddata, props.txinfo]);
 
     const [selectedPoint, setSelectedPointlatlon] = useState([]);
-    // const [selectedPoly, setSelectedPolylatlon] = useState([]);
 
     const usefullData = [];
     const polylines = []
@@ -77,7 +80,7 @@ const Map = (props) => {
                 // const too = turf.point(selectedPoly);
                 // const distancePoly = turf.distance(tx_point, too, options);
                 // distance_array_poly.push(distancePoly);
-                if (d.paths[i].num_of_interactions === 1 && selectedPoint.length > 0) {
+                if (d.paths[i].num_of_interactions > 0 && selectedPoint.length > 0) {
                     power_arry_without_los.push(d.paths[i].power);
                     d.paths[i].interactions.forEach(j => {
                         path_pos_array.push([j.position.lat, j.position.lon]);
@@ -152,7 +155,7 @@ const Map = (props) => {
         < div >
             <LeafletMap
                 center={Leipzig}
-                zoom={15.5}
+                zoom={10.5}
                 maxZoom={19}
                 attributionControl={true}
                 zoomControl={true}
@@ -161,6 +164,7 @@ const Map = (props) => {
                 dragging={true}
                 animate={true}
                 easeLinearity={0.35}
+
             >
                 <TileLayer
                     attribution='&copy; <a href="://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
@@ -168,44 +172,69 @@ const Map = (props) => {
                 />
                 {transmitter.length > 0 &&
                     < Marker position={transmitter} icon={<img src={image} alt="tx marker" />} >
-                        <Popup>{transmitter}</Popup>
+                        <Popup>  {
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row"> Tx Antenna</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Type of Antenna:</td>
+                                        <td>{txinfo['Type of Antenna']} </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tx Power:</td>
+                                        <td>{txinfo['power']} W </td>
+                                    </tr>
+                                    <tr>
+                                        <td> Frequency:</td>
+                                        <td>{txinfo['frequency']}Ghz </td>
+                                    </tr>
+                                </tbody>
+                            </table>}</Popup>
                     </Marker >}
 
                 {usefullData.map(item => < Circle onClick={handleClickCircle} id={item.name} key={item.name} center={item.point} fillColor="blue" radius={6} >
                     <Popup key={`popup ${item.name} `} >{
                         <div className="popup">
                             <table>
-
                                 <tbody>
                                     <tr>
                                         <td>ID :</td>
                                         <td>{id} </td>
                                     </tr>
                                     <tr>
+                                        <td>Position Lat:</td>
+                                        <td>{item.point[0]} </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Position Lon:</td>
+                                        <td>{item.point[1]}</td>
+                                    </tr>
+                                    <tr>
                                         <td>Distance to Tx :</td>
                                         <td>{distance_array[0]} meter </td>
                                     </tr>
                                     <tr>
-                                        <td> Number of path:</td>
+                                        <td> Number of Paths:</td>
                                         <td>{item.number_of_path}</td>
                                     </tr>
                                     <tr>
-                                        <td> avg_delay:</td>
-                                        <td>{item.avg_delay}</td>
+                                        <td> Average Delay:</td>
+                                        <td>{item.avg_delay} </td>
                                     </tr>
                                     <tr>
-                                        <td> avg_power:</td>
+                                        <td> Average Power:</td>
                                         <td>{item.avg_power}</td>
                                     </tr>
                                     <tr>
-                                        <td> avg_strength</td>
+                                        <td> Average Strength</td>
                                         <td>{item.avg_strength}</td>
                                     </tr>
                                     <tr>
-                                        <td> delaySpread:</td>
+                                        <td> DelaySpread:</td>
                                         <td>{item.delaySpread}</td>
                                     </tr>
-
                                 </tbody>
                             </table>
                         </div>
@@ -243,9 +272,6 @@ const Map = (props) => {
                     </Polyline>
                     }
                 </Circle >)}
-                {/* <div className="pointeval">
-                    <Evaluationreceiver />
-                </div> */}
             </LeafletMap>
         </div >
     );

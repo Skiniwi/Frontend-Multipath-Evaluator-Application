@@ -1,6 +1,7 @@
 import React from "react";
 import { A } from "hookrouter";
-import { Button } from "react-bootstrap";
+import { Button } from "reactstrap";
+
 
 export const NoPageFound = () => {
     return (

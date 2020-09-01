@@ -16,6 +16,7 @@
     "hookrouter": "^1.2.3",
     "jscpd": "^3.3.0-rc.10",
     "leaflet": "^1.6.0",
+    "leaflet-lasso": "^2.1.2",
     "react": "^16.13.1",
     "react-csv": "^2.0.3",
     "react-dom": "^16.13.1",

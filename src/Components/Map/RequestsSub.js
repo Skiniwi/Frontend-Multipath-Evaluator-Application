@@ -3,6 +3,8 @@ import { useSubscription } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import Map from "./Map";
 import Evaluation from "../Evaluation/Evaluation";
+import GetScenario from "./getscenarios";
+
 
 // const id = require('./Map');
 const REQUESTS_SUBSCRIPTION = gql`
@@ -31,6 +33,9 @@ function RequestsSub() {
   });
   const [points, setPoints] = useState([]);
   const [tx, setTx] = useState([]);
+  const [files, setFile] = useState([]);
+  const [txinfo, setTxInfo] = useState([]);
+
   useEffect(() => {
     if (
       !data ||
@@ -42,9 +47,12 @@ function RequestsSub() {
       return;
     }
     const content = JSON.parse(data.responseAdded.content)
+    setFile(content.files)
     setPoints(content.points)
     setTx(content.tx_position)
+    setTxInfo(content.tx_info)
   }, [data]);
+
   const [idd, setIdd] = useState(null);
   const [calculateddata, setCalculateddataa] = useState({});
   const parent = (id) => {
@@ -55,9 +63,10 @@ function RequestsSub() {
   }
   return (
     <>
+      {<GetScenario files={files} />}
       {/* {loading && alert("Please select a Point from the Map to have more options")} */}
       {<Evaluation idd={idd} tx={tx} points={points} evaluationn={evaluation} />}
-      {<Map tx={tx} points={points} parentt={parent} calculateddata={calculateddata} />}
+      {<Map txinfo={txinfo} tx={tx} points={points} parentt={parent} calculateddata={calculateddata} />}
     </>
   );
 }
