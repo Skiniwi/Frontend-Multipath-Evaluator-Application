@@ -10,7 +10,6 @@ import image from "./icons/image.svg";
 import Marker from 'react-leaflet-enhanced-marker';
 import * as turf from "@turf/turf";
 // import { LassoControl } from "leaflet-lasso";
-
 const Leipzig = [51.315579, 12.377772]
 const Map = (props) => {
     const [receivers, setReceivers] = useState([]);
@@ -33,15 +32,23 @@ const Map = (props) => {
     const [selectedPoint, setSelectedPointlatlon] = useState([]);
 
     const usefullData = [];
-    const polylines = []
-    const lineOfSight = []
+    const polylinesR = [];
+    const polylinesD = [];
+
+    const lineOfSight = [];
     const path_pos_array = [];
     const distance_array = [];
-    const distance_array_poly = [];
+    const distance_array_LOS = [];
+    const distance_array_polyR = [];
+    const distance_array_polyD = [];
+
     const options = { units: "meters" };
     let tx_point = [];
     const id_poly = [];
-    const power_arry_without_los = [];
+
+    const power_LOS = [];
+    const power_arry_without_losR = [];
+    const power_arry_without_losD = [];
 
     let sum_delay = []
     let avg_delay = []
@@ -52,6 +59,9 @@ const Map = (props) => {
     let expectation_delay = []
     let expectation_delay_sq = []
     let delaySpread = []
+    let delaySpread1 = []
+    let aoaSpread = []
+    let aodSpread = []
 
     for (let i = 0; i < calculateddata.length; i++) {
         if (calculateddata.length !== null) {
@@ -64,6 +74,9 @@ const Map = (props) => {
             expectation_delay = calculateddata[i].expectation_delay;
             expectation_delay_sq = calculateddata[i].expectation_delay_sq;
             delaySpread = calculateddata[i].delaySpread;
+            aoaSpread = calculateddata[i].aoaSpread;
+            aodSpread = calculateddata[i].aodSpread;
+            delaySpread1 = calculateddata[i].delaySpread1;
         }
     }
 
@@ -74,27 +87,36 @@ const Map = (props) => {
                 //calculate the distance to the transmitter
                 const to = turf.point(selectedPoint);
                 const distance = turf.distance(tx_point, to, options);
-                // distance_array.push((Math.round(distance * 100) / 100).toFixed(3));
-                distance_array.push(distance);
-
-                // const too = turf.point(selectedPoly);
-                // const distancePoly = turf.distance(tx_point, too, options);
-                // distance_array_poly.push(distancePoly);
+                distance_array.push(Math.floor(distance));
                 if (d.paths[i].num_of_interactions > 0 && selectedPoint.length > 0) {
-                    power_arry_without_los.push(d.paths[i].power);
                     d.paths[i].interactions.forEach(j => {
                         path_pos_array.push([j.position.lat, j.position.lon]);
                         id_poly.push(j.interacted_obj_id)
-                        let polyline = [selectedPoint, [j.position.lat, j.position.lon], transmitter];
-                        polylines.push(polyline);
-                        const toPoly = turf.lineString(polyline);
-                        const distancePoly = turf.length(toPoly, options);
-                        distance_array_poly.push(Math.floor(distancePoly));
+                        if (j.interaction_type === 'R') {
+                            let polylineR = [selectedPoint, [j.position.lat, j.position.lon], transmitter];
+                            polylinesR.push(polylineR);
+                            const toPoly = turf.lineString(polylineR);
+                            const distancePolyR = turf.length(toPoly, options);
+                            distance_array_polyR.push(Math.floor(distancePolyR));
+                            power_arry_without_losR.push(d.paths[i].power)
+                        }
+                        if (j.interaction_type === 'D') {
+                            let polylineD = [selectedPoint, [j.position.lat, j.position.lon], transmitter];
+                            polylinesD.push(polylineD);
+                            const toPoly = turf.lineString(polylineD);
+                            const distancePolyD = turf.length(toPoly, options);
+                            distance_array_polyD.push(Math.floor(distancePolyD));
+                            power_arry_without_losD.push(d.paths[i].power)
+                        }
                     });
                 }
                 if (d.paths[i].num_of_interactions === 0 && selectedPoint.length > 0) {
                     let polyline = [selectedPoint, transmitter]
                     lineOfSight.push(polyline);
+                    const toPoly = turf.lineString(polyline);
+                    const distanceLOS = turf.length(toPoly, options);
+                    distance_array_LOS.push(Math.floor(distanceLOS));
+                    power_LOS.push(d.paths[0].power)
                 }
             }
         }
@@ -104,11 +126,19 @@ const Map = (props) => {
             name: d.point_id,
             point: [d.position.lat, d.position.lon],
             number_of_path: d.paths.length,
+            number_of_los: distance_array_LOS.length,
+            number_of_pathR: distance_array_polyR.length,
+            number_of_pathD: distance_array_polyD.length,
             path_pos_array,
-            polys: polylines,
+            polysR: polylinesR,
+            polysD: polylinesD,
             polyLineOfsight: lineOfSight,
-            distance_array_poly: distance_array_poly,
-            power_arry_without_los: power_arry_without_los,
+            distanceLOS: distance_array_LOS,
+            distance_array_polyR: distance_array_polyR,
+            distance_array_polyD: distance_array_polyD,
+            power_LOS: power_LOS,
+            power_arry_without_losR: power_arry_without_losR,
+            power_arry_without_losD: power_arry_without_losD,
             sum_delay: sum_delay,
             avg_delay: avg_delay,
             sum_power: sum_power,
@@ -118,39 +148,21 @@ const Map = (props) => {
             expectation_delay: expectation_delay,
             expectation_delay_sq: expectation_delay_sq,
             delaySpread: delaySpread,
+            aoaSpread: aoaSpread,
+            aodSpread: aodSpread,
+            delaySpread1: delaySpread1,
 
         };
         usefullData.push(usefullItem);
 
     })
 
-
-
     //The parseInt() function parses a string argument and returns an integer of the specified
-    // const parentt = () => { props.parent(id) }
-
     const handleClickCircle = (event) => {
         setSelectedPointlatlon([event.target._latlng.lat, event.target._latlng.lng])
         setId(event.sourceTarget.options.id)
         props.parentt(event.sourceTarget.options.id)
     }
-    // selectedPoly.forEach(d => {
-    //     // for (let i = 0; i < selectedPoly.length; i++) {
-    //     const toPoly = turf.lineString([[d[0].lat, d[0].lng], [d[1].lat, d[1].lng], [d[2].lat, d[2].lng]]);
-    //     const distancePoly = turf.length(toPoly, options);
-    //     distance_array_poly.push((Math.round(distancePoly * 100) / 100).toFixed(3));
-    //     console.log(distance_array_poly)
-
-    //     // }
-    // })
-
-    // const handleClickPoly = (event) => {
-    //     setSelectedPolylatlon(event.target._latlngs[0])
-    //     // console.log(event.target._latlngs[0])
-    //     // console.log(selectedPoly)
-
-    // }
-
     return (
         < div >
             <LeafletMap
@@ -194,7 +206,8 @@ const Map = (props) => {
                             </table>}</Popup>
                     </Marker >}
 
-                {usefullData.map(item => < Circle onClick={handleClickCircle} id={item.name} key={item.name} center={item.point} fillColor="blue" radius={6} >
+                {usefullData.map(item => < Circle onClick={handleClickCircle} id={item.name} key={item.name} center={item.point} fillColor="blue"
+                    radius={6} >
                     <Popup key={`popup ${item.name} `} >{
                         <div className="popup">
                             <table>
@@ -213,52 +226,119 @@ const Map = (props) => {
                                     </tr>
                                     <tr>
                                         <td>Distance to Tx :</td>
-                                        <td>{distance_array[0]} meter </td>
+                                        <td>{distance_array[0]} [m] </td>
                                     </tr>
                                     <tr>
-                                        <td> Number of Paths:</td>
+                                        <td>Total Rays:</td>
                                         <td>{item.number_of_path}</td>
                                     </tr>
                                     <tr>
+                                        <td>LOS Rays:</td>
+                                        <td>{item.number_of_los}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Reflected Rays:</td>
+                                        <td>{item.number_of_pathR}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Diffracted Rays:</td>
+                                        <td>{item.number_of_pathD}</td>
+                                    </tr>
+                                    <tr>
                                         <td> Average Delay:</td>
-                                        <td>{item.avg_delay} </td>
+                                        <td>{item.avg_delay}[µs]</td>
                                     </tr>
                                     <tr>
                                         <td> Average Power:</td>
-                                        <td>{item.avg_power}</td>
+                                        <td>{item.avg_power}[dBm]</td>
                                     </tr>
                                     <tr>
                                         <td> Average Strength</td>
-                                        <td>{item.avg_strength}</td>
+                                        <td>{item.avg_strength}[dBuV/m]</td>
                                     </tr>
+
                                     <tr>
                                         <td> DelaySpread:</td>
-                                        <td>{item.delaySpread}</td>
+                                        <td>{item.delaySpread}[µs]</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     } </Popup>
 
-                    {item.polyLineOfsight.length > 0 && <Polyline key={`lospoly${item.name} `} positions={[item.polyLineOfsight]} color={'red'} />}
+                    {item.polyLineOfsight.length > 0 && <Polyline key={`lospoly${item.name} `} positions={[item.polyLineOfsight]} color={'red'} >
 
-                    {item.polys.length > 0 && <Polyline key={`selectedPoint${item.name} `} positions={[item.polys]}
+                        <Popup key={`popuplos ${item.name} `} >{
+                            <div >
+                                <table >
+                                    <tbody>
+                                        {distance_array_LOS.map((item, index) =>
+                                            <tr key={index}>
+                                                <td>Distance to Tx  :</td>
+                                                <td>{item} [m]  </td>
+                                            </tr>
+                                        )}
+                                        {power_LOS.map((item, index) =>
+                                            <tr key={index}>
+                                                <td>Power LOS :</td>
+                                                <td>{item}  </td>
+                                            </tr>
+                                        )}
+                                    </tbody>
+                                </table>
+
+                            </div >
+                        } </Popup>
+                    </Polyline>
+                    }
+
+
+                    {item.polysR.length > 0 && <Polyline key={`selectedPointR${item.name} `} positions={[item.polysR]}
                         color={'yellow'}
                         weight={3}
                         opacity={0.2}
                         smoothFactor={5}
                     >
-                        <Popup key={`popup ${item.name} `} >{
+                        <Popup key={`popupR ${item.name} `} >{
                             <div className="popup">
                                 <table >
                                     <tbody>
-                                        {distance_array_poly.map((item, index) =>
+                                        {distance_array_polyR.map((item, index) =>
+                                            <tr key={index}>
+                                                <td>Distance to Tx {index} :</td>
+                                                <td>{item} [m]  </td>
+                                            </tr>
+                                        )}
+                                        {power_arry_without_losR.map((item, index) =>
+                                            <tr key={index}>
+                                                <td>Power {index} :</td>
+                                                <td>{item}  </td>
+                                            </tr>
+                                        )}
+                                    </tbody>
+                                </table>
+
+                            </div >
+                        } </Popup>
+                    </Polyline>
+                    }
+                    {item.polysD.length > 0 && <Polyline key={`selectedPointD${item.name} `} positions={[item.polysD]}
+                        color={'orange'}
+                        weight={3}
+                        opacity={0.2}
+                        smoothFactor={5}
+                    >
+                        <Popup key={`popupD ${item.name} `} >{
+                            <div className="popup">
+                                <table >
+                                    <tbody>
+                                        {distance_array_polyD.map((item, index) =>
                                             <tr key={index}>
                                                 <td>Distance to Tx {index} :</td>
                                                 <td>{item} meter  </td>
                                             </tr>
                                         )}
-                                        {power_arry_without_los.map((item, index) =>
+                                        {power_arry_without_losD.map((item, index) =>
                                             <tr key={index}>
                                                 <td>Power {index} :</td>
                                                 <td>{item}  </td>

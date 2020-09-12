@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
-import AddRequest from "./AddRequest";
+import AddRequest from "./GetPointsData";
 
 const ADD_REQUEST = gql`
 mutation createRequest($content: String!, $serviceID: String!) {

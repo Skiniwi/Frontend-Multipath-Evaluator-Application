@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useSubscription } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import Map from "./Map";
-import Evaluation from "../Evaluation/Evaluation";
-import GetScenario from "./getscenarios";
-
+import Evaluation from "../Evaluation/EvaluationAllPoints";
+import GetScenario from "./GetScenarionames";
+import OnePoint from '../Evaluation/EvalOnePoint';
 
 // const id = require('./Map');
 const REQUESTS_SUBSCRIPTION = gql`
@@ -66,6 +66,9 @@ function RequestsSub() {
       {<GetScenario files={files} />}
       {/* {loading && alert("Please select a Point from the Map to have more options")} */}
       {<Evaluation idd={idd} tx={tx} points={points} evaluationn={evaluation} />}
+      {<OnePoint tx={tx} idd={idd} points={points} evaluationn={evaluation} />}
+
+
       {<Map txinfo={txinfo} tx={tx} points={points} parentt={parent} calculateddata={calculateddata} />}
     </>
   );

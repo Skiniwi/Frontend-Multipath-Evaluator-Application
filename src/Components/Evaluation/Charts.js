@@ -14,7 +14,6 @@ import uuid from 'react-uuid';
 function Chart(props) {
     const [dCdf, setDCdf] = useState([])
     const [dCCdf, setDCCdf] = useState([])
-
     const [d, setD] = useState([])
     const [y, setYarray] = useState([])
     const [x, setXarray] = useState([])
@@ -28,11 +27,12 @@ function Chart(props) {
     const [namescatter, setNameScatter] = useState('')
     const [nameScatterCdf, setNameScatterCdf] = useState('')
     const [nameScatterCCdf, setNameScatterCCdf] = useState('')
-
     const [selectedValuex, setSelectedValuex] = useState('')
     const [selectedValuey, setSelectedValuey] = useState('')
     const [collapse, setCollapse] = useState(true);
     const [status, setStatus] = useState(namescatterr);
+    const [colorr, setColor] = useState("")
+    const [colorr1, setColor1] = useState("")
     useEffect(() => {
         if (selectedchart === "Scatter Chart") {
             setDataKey("y");
@@ -42,7 +42,7 @@ function Chart(props) {
             setDatachart(d)
         }
         else if (selectedchart === "CDF Chart") {
-            setDataKey("yCdf");
+            setDataKey("CDF");
             setNamey("CDF");
             setValuey("CDF");
             setNamescatterr(nameScatterCdf);
@@ -50,13 +50,14 @@ function Chart(props) {
             setDomain([0, 1])
         }
         else if (selectedchart === "C-CDF Chart") {
-            setDataKey("yCCdf");
+            setDataKey("C-CDF");
             setNamey("C-CDF");
             setValuey("C-CDF");
             setNamescatterr(nameScatterCCdf);
             setDatachart(dCCdf);
             setDomain([0, 1])
         }
+
     }, [selectedchart, selectedValuey, namescatter, d, nameScatterCdf, dCdf, nameScatterCCdf, dCCdf])
 
     useEffect(() => {
@@ -70,14 +71,14 @@ function Chart(props) {
         const mycdf = cdf(x);
         const cdfx = mycdf.xs()
         const cdfy = mycdf.ps()
-        const array = cdfx.map((v, i) => ({ 'x': v, 'yCdf': cdfy[i] }));
+        const array = cdfx.map((v, i) => ({ 'x': v, 'CDF': cdfy[i] }));
         setDCdf(array)
     }, [x])
     useEffect(() => {
         const myccdf = cdf(x);
         const ccdfx = myccdf.xs()
         const ccdfy = myccdf.ps()
-        const arrayc = ccdfx.map((v, i) => ({ 'x': v, 'yCCdf': 1 - ccdfy[i] }));
+        const arrayc = ccdfx.map((v, i) => ({ 'x': v, 'C-CDF': 1 - ccdfy[i] }));
         setDCCdf(arrayc)
     }, [x])
 
@@ -88,7 +89,8 @@ function Chart(props) {
         setXarray(props.x);
         setYarray(props.y);
         setSelectedchart(props.selectedchart)
-
+        setColor1(props.colorr1)
+        setColor(props.colorr)
         if (!props.selectedValuex) {
             return
         };
@@ -104,10 +106,8 @@ function Chart(props) {
                 props.selectedValuex.slice(0, 1).toUpperCase() +
                 props.selectedValuex.slice(1, 2) +
                 props.selectedValuex.slice(2).toUpperCase()
-
             );
         }
-        //
         setSelectedValuey(props.selectedValuey.slice(0, 1).toUpperCase() +
             props.selectedValuey.slice(1, props.selectedValuey.length));
 
@@ -121,18 +121,20 @@ function Chart(props) {
 
         setNameScatterCCdf(props.selectedValuex.slice(0, 1).toUpperCase() +
             props.selectedValuex.slice(1, props.selectedValuex.length) + '/C-CDF')
+    }, [props.x, props.y, props.selectedValuex, props.selectedValuey, props.selectedchart, props.colorr, props.colorr1]);
 
-    }, [props.x, props.y, props.selectedValuex, props.selectedValuey, props.selectedchart]);
     const onEntering = () => setStatus(<Spinner size="sm" color="light" />);
     const onEntered = () => setStatus(namescatterr);
     const onExiting = () => setStatus(<Spinner size="sm" color="light" />)
     const onExited = () => setStatus(namescatterr);
     const toggle = () => setCollapse(!collapse);
     const deleteChart = () => props.deleteChart(props.index)
-    // console.log(x)
-
+    let colo = ''
+    if (colorr1 !== undefined) { colo = colorr1 }
+    if (colorr !== undefined) { colo = colorr }
     return (
         <>
+
             <div id={uuid()} className="openandclosechart">
                 <Navbar className="nav" expand="sm">
                     <h5>{status}</h5>
@@ -165,7 +167,8 @@ function Chart(props) {
                                 >
                                     <CartesianGrid strokeDasharray="3 3" />
                                     <XAxis
-                                        type="number" dataKey={'x'} name={selectedValuex}
+                                        type="number"
+                                        dataKey={'x'}
                                         style={{ fontSize: '0.8rem', fontFamily: 'Arial' }}
                                         stroke="white" axisLine={false}
                                         tickLine={false}
@@ -174,8 +177,9 @@ function Chart(props) {
                                             value: selectedValuex, position: 'insideBottom', offset: -12
                                         }}
                                     />
-                                    <YAxis type="number"
-                                        dataKey={dataKey} name={namey}
+                                    <YAxis
+                                        type="number"
+                                        dataKey={namey}
                                         style={{ fontSize: '0.8rem', fontFamily: 'Arial' }}
                                         stroke="white" axisLine={false}
                                         tickLine={false}
@@ -185,15 +189,18 @@ function Chart(props) {
                                             fontSize: '1.5rem', fontFamily: 'Arial', fill: '#ffffff',
                                             value: valuey, angle: -90, position: 'left', dy: -70
                                         }} />
-                                    <Tooltip />
-                                    <Line connectNulls type="monotone" dataKey={dataKey} stroke="#00ff00" fill="#00ff00" />
-                                </LineChart>
 
+                                    <Tooltip wrapperStyle={{ width: 'auto', color: "#000000" }} cursor={{ strokeDasharray: '3 3' }} />
+                                    <Line dataKey={dataKey}
+                                        dot={false}
+                                        activeShape={false} type="monotone" activeDot={{ r: 3 }} stroke={colo} />
+                                </LineChart>
                             </ResponsiveContainer >}
 
                         {dataKey === 'y' &&
                             <ResponsiveContainer >
                                 < ScatterChart
+                                    data={datachart}
                                     width={450}
                                     height={400}
                                     margin={{
@@ -218,14 +225,14 @@ function Chart(props) {
                                         tickLine={false}
                                         tickCount={20}
                                         domain={domain}
+
                                         label={{
                                             fontSize: '1.5rem', fontFamily: 'Arial', fill: '#ffffff',
                                             value: valuey, angle: -90, position: 'left', dy: -70
                                         }} />
-                                    <Tooltip wrapperStyle={{ backgroundColor: '#ccc' }} cursor={{ strokeDasharray: '3 3' }} />
-                                    <Scatter name={namescatterr} data={datachart} fill='#00ff00' />
+                                    <Tooltip wrapperStyle={{ width: 'auto', color: "#000000" }} cursor={{ strokeDasharray: '3 3' }} />
+                                    <Scatter activeDot name={namescatterr} data={datachart} fill={colo} />
                                 </ScatterChart>
-
                             </ResponsiveContainer>
                         }
                     </div>

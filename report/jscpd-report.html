@@ -28,8 +28,8 @@ window.onload = function() {
         name: 'Copy/Paste report',
         type: 'pie',
         data: [
-          { value: 2272, name: 'Total' },
-          { value: 0, name: 'Copy/Pasted' },
+          { value: 2744, name: 'Total' },
+          { value: 80, name: 'Copy/Pasted' },
         ]
       }
     ]
@@ -66,7 +66,7 @@ window.onload = function() {
       {
         name: 'Formats analyzed',
         type: 'pie',
-        data: [{"value":422,"name":"markup"},{"value":1419,"name":"javascript"},{"value":27,"name":"yaml"},{"value":186,"name":"css"},{"value":88,"name":"json"},{"value":63,"name":"important"},{"value":67,"name":"markdown"}]
+        data: [{"value":466,"name":"markup"},{"value":1736,"name":"javascript"},{"value":27,"name":"yaml"},{"value":298,"name":"css"},{"value":87,"name":"json"},{"value":63,"name":"important"},{"value":67,"name":"markdown"}]
       }
     ]
   });
@@ -304,7 +304,87 @@ a.top {
     text-align: center;
 
   }
-}</style></head><body><div class="pure-g" id="layout"><div class="sidebar pure-u-1 pure-u-md-1-4"><div class="header"><img src="https://raw.githubusercontent.com/kucherenko/jscpd/1.0.0-alpha/assets/logo-small-box.svg?sanitize=true" width="190"><nav class="nav"><ul class="nav-list"><li class="nav-item"><a class="pure-button" href="#markup">markup</a></li><li class="nav-item"><a class="pure-button" href="#javascript">javascript</a></li><li class="nav-item"><a class="pure-button" href="#yaml">yaml</a></li><li class="nav-item"><a class="pure-button" href="#css">css</a></li><li class="nav-item"><a class="pure-button" href="#json">json</a></li><li class="nav-item"><a class="pure-button" href="#important">important</a></li><li class="nav-item"><a class="pure-button" href="#markdown">markdown</a></li></ul></nav></div></div><div class="content pure-u-1 pure-u-md-3-4"><a name="top"></a><div class="pure-g"><div class="pure-u-1-2 pure-u-md-1" id="totalChart" style="min-height:20em;"></div><div class="pure-u-1-2 pure-u-md-1" id="formatsChart" style="min-height:20em;"></div></div><div class="controls"><div class="pure-u"><button class="pure-button" onclick="collapseExpandAll()">Collapse/Expand All</button></div></div><table class="pure-table stats"><thead><tr><th>Total files</th><th>Total lines of code</th><th>Duplicated lines</th><th>% of duplications</th></tr></thead><tbody><tr><td>27</td><td>2272</td><td>0</td><td>0%</td></tr></tbody></table><div class="clones collapsed"><a name="markup"></a><h1 class="content-subhead">markup</h1><div class="mode-stats"><p><span class="mode-rate">0%</span> Total files: 3, total lines of code: 422, duplicated lines: 0<a class="top" href="#top">[Top ↑↑↑]</a></p></div><a name="javascript"></a><h1 class="content-subhead">javascript</h1><div class="mode-stats"><p><span class="mode-rate">0%</span> Total files: 16, total lines of code: 1419, duplicated lines: 0<a class="top" href="#top">[Top ↑↑↑]</a></p></div><a name="yaml"></a><h1 class="content-subhead">yaml</h1><div class="mode-stats"><p><span class="mode-rate">0%</span> Total files: 1, total lines of code: 27, duplicated lines: 0<a class="top" href="#top">[Top ↑↑↑]</a></p></div><a name="css"></a><h1 class="content-subhead">css</h1><div class="mode-stats"><p><span class="mode-rate">0%</span> Total files: 2, total lines of code: 186, duplicated lines: 0<a class="top" href="#top">[Top ↑↑↑]</a></p></div><a name="json"></a><h1 class="content-subhead">json</h1><div class="mode-stats"><p><span class="mode-rate">0%</span> Total files: 3, total lines of code: 88, duplicated lines: 0<a class="top" href="#top">[Top ↑↑↑]</a></p></div><a name="important"></a><h1 class="content-subhead">important</h1><div class="mode-stats"><p><span class="mode-rate">0%</span> Total files: 1, total lines of code: 63, duplicated lines: 0<a class="top" href="#top">[Top ↑↑↑]</a></p></div><a name="markdown"></a><h1 class="content-subhead">markdown</h1><div class="mode-stats"><p><span class="mode-rate">0%</span> Total files: 1, total lines of code: 67, duplicated lines: 0<a class="top" href="#top">[Top ↑↑↑]</a></p></div></div><div class="footer"><p>© 2013-2018 jscpd, copy/paste detector</p></div></div></div><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-730549-17"></script><script>window.dataLayer = window.dataLayer || [];
+}</style></head><body><div class="pure-g" id="layout"><div class="sidebar pure-u-1 pure-u-md-1-4"><div class="header"><img src="https://raw.githubusercontent.com/kucherenko/jscpd/1.0.0-alpha/assets/logo-small-box.svg?sanitize=true" width="190"><nav class="nav"><ul class="nav-list"><li class="nav-item"><a class="pure-button" href="#markup">markup</a></li><li class="nav-item"><a class="pure-button" href="#javascript">javascript</a></li><li class="nav-item"><a class="pure-button" href="#yaml">yaml</a></li><li class="nav-item"><a class="pure-button" href="#css">css</a></li><li class="nav-item"><a class="pure-button" href="#json">json</a></li><li class="nav-item"><a class="pure-button" href="#important">important</a></li><li class="nav-item"><a class="pure-button" href="#markdown">markdown</a></li></ul></nav></div></div><div class="content pure-u-1 pure-u-md-3-4"><a name="top"></a><div class="pure-g"><div class="pure-u-1-2 pure-u-md-1" id="totalChart" style="min-height:20em;"></div><div class="pure-u-1-2 pure-u-md-1" id="formatsChart" style="min-height:20em;"></div></div><div class="controls"><div class="pure-u"><button class="pure-button" onclick="collapseExpandAll()">Collapse/Expand All</button></div></div><table class="pure-table stats"><thead><tr><th>Total files</th><th>Total lines of code</th><th>Duplicated lines</th><th>% of duplications</th></tr></thead><tbody><tr><td>28</td><td>2744</td><td>80</td><td>2.92%</td></tr></tbody></table><div class="clones collapsed"><a name="markup"></a><h1 class="content-subhead">markup</h1><div class="mode-stats"><p><span class="mode-rate">0%</span> Total files: 3, total lines of code: 466, duplicated lines: 0<a class="top" href="#top">[Top ↑↑↑]</a></p></div><a name="javascript"></a><h1 class="content-subhead">javascript</h1><div class="mode-stats"><p><span class="mode-rate">3.74%</span> Total files: 17, total lines of code: 1736, duplicated lines: 65<a class="top" href="#top">[Top ↑↑↑]</a></p></div><section class="clone"><header><button class="pure-button expand">+</button><button class="pure-button collapse">-</button><div class="clone-title">/home/skiniwi/Documents/Work with API/react_gql_sum_client/src/Components/Evaluation/EvalOnePoint.js[281:64 - 296:51]<br/>/home/skiniwi/Documents/Work with API/react_gql_sum_client/src/Components/Evaluation/EvaluationAllPoints.js[208:63 - 223:50]</div></header><div class="clone-description"><pre><span class="meta"><span>281</span><span>282</span><span>283</span><span>284</span><span>285</span><span>286</span><span>287</span><span>288</span><span>289</span><span>290</span><span>291</span><span>292</span><span>293</span><span>294</span><span>295</span><span>296</span></span><span class="meta"><span>208</span><span>209</span><span>210</span><span>211</span><span>212</span><span>213</span><span>214</span><span>215</span><span>216</span><span>217</span><span>218</span><span>219</span><span>220</span><span>221</span><span>222</span><span>223</span></span><code class="language-javascript">&gt;
+                &lt;Navbar className=&quot;nav_button&quot; expand=&quot;sm&quot;&gt;
+                    &lt;div className=&quot;headernav1&quot; &gt; {status}&lt;/div&gt;
+                    &lt;Button className=&quot;btn_in_nav_button1&quot; size=&quot;sm&quot; dark=&quot;true&quot; onClick={toggle} &gt;
+                        {collapse ? onClosed &amp;&amp; &lt;i className=&quot;arrow up&quot;&gt;&lt;/i&gt; : &lt;i className=&quot;arrow down&quot;&gt;&lt;/i&gt;}
+                    &lt;/Button&gt;
+                &lt;/Navbar&gt;
+                &lt;Collapse className=&quot;Collapse&quot;
+
+                    isOpen={collapse}
+                    onEntering={onOpening}
+                    onEntered={onOpen}
+                    onExiting={onClosing}
+                    onExited={onClosed}
+                &gt;
+                    &lt;div className=&quot;windowbutton1&quot;</code><span class="cl"></span></pre></div></section><section class="clone"><header><button class="pure-button expand">+</button><button class="pure-button collapse">-</button><div class="clone-title">/home/skiniwi/Documents/Work with API/react_gql_sum_client/src/Components/Evaluation/EvalOnePoint.js[301:121 - 314:121]<br/>/home/skiniwi/Documents/Work with API/react_gql_sum_client/src/Components/Evaluation/EvaluationAllPoints.js[229:120 - 242:120]</div></header><div class="clone-description"><pre><span class="meta"><span>301</span><span>302</span><span>303</span><span>304</span><span>305</span><span>306</span><span>307</span><span>308</span><span>309</span><span>310</span><span>311</span><span>312</span><span>313</span><span>314</span></span><span class="meta"><span>229</span><span>230</span><span>231</span><span>232</span><span>233</span><span>234</span><span>235</span><span>236</span><span>237</span><span>238</span><span>239</span><span>240</span><span>241</span><span>242</span></span><code class="language-javascript">=&quot;selectchart&quot; defaultChecked
+                                    value={selectedchart} onChange={handleChangetypeofchart} &gt;
+                                    &lt;option color=&quot;dark&quot; &gt;CDF Chart&lt;/option&gt;
+                                    &lt;option color=&quot;dark&quot;  &gt;C-CDF Chart&lt;/option&gt;
+                                    &lt;option color=&quot;dark&quot;  &gt;Scatter Chart&lt;/option&gt;
+
+                                &lt;/Input&gt;
+                            &lt;/FormGroup&gt;
+                        &lt;/ButtonGroup&gt;
+
+                        &lt;ButtonGroup className=&quot;buttonx&quot; size=&quot;sm&quot;&gt;
+                            &lt;FormGroup &gt;
+                                &lt;DropdownItem header color=&quot;dark&quot; &gt;&lt;div className=&quot;headerdropdownitem&quot; &gt; Select X Axis &lt;/div &gt;&lt;/DropdownItem&gt;
+                                &lt;Input color=&quot;dark&quot; className=&quot;btn_in_window_evaluation&quot; type=&quot;select&quot; name='select' idd</code><span class="cl"></span></pre></div></section><section class="clone"><header><button class="pure-button expand">+</button><button class="pure-button collapse">-</button><div class="clone-title">/home/skiniwi/Documents/Work with API/react_gql_sum_client/src/Components/Evaluation/EvalOnePoint.js[314:121 - 328:125]<br/>/home/skiniwi/Documents/Work with API/react_gql_sum_client/src/Components/Evaluation/EvaluationAllPoints.js[242:120 - 255:124]</div></header><div class="clone-description"><pre><span class="meta"><span>314</span><span>315</span><span>316</span><span>317</span><span>318</span><span>319</span><span>320</span><span>321</span><span>322</span><span>323</span><span>324</span><span>325</span><span>326</span><span>327</span><span>328</span></span><span class="meta"><span>242</span><span>243</span><span>244</span><span>245</span><span>246</span><span>247</span><span>248</span><span>249</span><span>250</span><span>251</span><span>252</span><span>253</span><span>254</span><span>255</span><span>256</span></span><code class="language-javascript">=&quot;xSelect&quot; defaultChecked
+                                    value={selectedValuex}
+                                    onClick={KeysFunction}
+                                    onChange={handleChangex}
+                                    placeholder=&quot;Check it out&quot;  &gt;
+                                    {final_keys.length &gt; 0 ? final_keys.map((item1, index1) =&gt; &lt;option color=&quot;dark&quot; key={index1} &gt;{item1}&lt;/option&gt;) : &lt;option color=&quot;dark&quot;  &gt;Double Click&lt;/option&gt;}
+
+                                &lt;/Input&gt;
+
+                            &lt;/FormGroup&gt;
+
+                            {selectedchart === &quot;Scatter Chart&quot; ?
+                                &lt; FormGroup &gt;
+                                    &lt;DropdownItem header color=&quot;dark&quot;&gt;&lt;div className=&quot;headerdropdownitem&quot; &gt;Select Y Axis &lt;/div &gt; &lt;/DropdownItem&gt;
+                                    &lt;Input color=&quot;dark&quot; className=&quot;btn_in_window_evaluation&quot; type=&quot;select&quot; name=&quot;select&quot; idd</code><span class="cl"></span></pre></div></section><section class="clone"><header><button class="pure-button expand">+</button><button class="pure-button collapse">-</button><div class="clone-title">/home/skiniwi/Documents/Work with API/react_gql_sum_client/src/Components/Evaluation/EvalOnePoint.js[328:125 - 340:46]<br/>/home/skiniwi/Documents/Work with API/react_gql_sum_client/src/Components/Evaluation/EvaluationAllPoints.js[255:124 - 266:67]</div></header><div class="clone-description"><pre><span class="meta"><span>328</span><span>329</span><span>330</span><span>331</span><span>332</span><span>333</span><span>334</span><span>335</span><span>336</span><span>337</span><span>338</span><span>339</span><span>340</span></span><span class="meta"><span>255</span><span>256</span><span>257</span><span>258</span><span>259</span><span>260</span><span>261</span><span>262</span><span>263</span><span>264</span><span>265</span><span>266</span><span>267</span></span><code class="language-javascript">=&quot;ySelect&quot; defaultChecked
+                                        value={selectedValuey}
+                                        onClick={KeysFunction}
+                                        onChange={handleChangey} &gt;
+                                        {final_keys.length &gt; 0 &amp;&amp; final_keys.map((item, index) =&gt; &lt;option color=&quot;dark&quot; key={index} &gt;{item}&lt;/option&gt;)}
+                                    &lt;/Input&gt;
+                                &lt;/FormGroup&gt; : ''}
+                        &lt;/ButtonGroup&gt;
+
+                        {&lt;ButtonGroup className=&quot;buttonevaluation&quot; size=&quot;sm&quot;&gt;
+                            &lt;FormGroup&gt;
+                                &lt;Button onClick={() =&gt; {
+                                    yFunction</code><span class="cl"></span></pre></div></section><section class="clone"><header><button class="pure-button expand">+</button><button class="pure-button collapse">-</button><div class="clone-title">/home/skiniwi/Documents/Work with API/react_gql_sum_client/src/Components/Evaluation/Chart.js[244:63 - 255:45]<br/>/home/skiniwi/Documents/Work with API/react_gql_sum_client/src/Components/Evaluation/Chart.js[204:48 - 216:42]</div></header><div class="clone-description"><pre><span class="meta"><span>244</span><span>245</span><span>246</span><span>247</span><span>248</span><span>249</span><span>250</span><span>251</span><span>252</span><span>253</span><span>254</span><span>255</span></span><span class="meta"><span>204</span><span>205</span><span>206</span><span>207</span><span>208</span><span>209</span><span>210</span><span>211</span><span>212</span><span>213</span><span>214</span><span>215</span></span><code class="language-javascript">={namey}
+                                        style={{ fontSize: '0.8rem', fontFamily: 'Arial' }}
+                                        stroke=&quot;white&quot; axisLine={false}
+                                        tickLine={false}
+                                        tickCount={20}
+                                        domain={domain}
+                                        label={{
+                                            fontSize: '1.5rem', fontFamily: 'Arial', fill: '#ffffff',
+                                            value: valuey, angle: -90, position: 'left', dy: -70
+                                        }} /&gt;
+                                    &lt;Tooltip wrapperStyle={{ width: 'auto', color: &quot;#000000&quot; }} cursor={{ strokeDasharray: '3 3' }} /&gt;
+                                    &lt;Scatter</code><span class="cl"></span></pre></div></section><a name="yaml"></a><h1 class="content-subhead">yaml</h1><div class="mode-stats"><p><span class="mode-rate">0%</span> Total files: 1, total lines of code: 27, duplicated lines: 0<a class="top" href="#top">[Top ↑↑↑]</a></p></div><a name="css"></a><h1 class="content-subhead">css</h1><div class="mode-stats"><p><span class="mode-rate">5.03%</span> Total files: 2, total lines of code: 298, duplicated lines: 15<a class="top" href="#top">[Top ↑↑↑]</a></p></div><section class="clone"><header><button class="pure-button expand">+</button><button class="pure-button collapse">-</button><div class="clone-title">/home/skiniwi/Documents/Work with API/react_gql_sum_client/src/App.css[189:14 - 204:28]<br/>/home/skiniwi/Documents/Work with API/react_gql_sum_client/src/App.css[166:13 - 181:27]</div></header><div class="clone-description"><pre><span class="meta"><span>189</span><span>190</span><span>191</span><span>192</span><span>193</span><span>194</span><span>195</span><span>196</span><span>197</span><span>198</span><span>199</span><span>200</span><span>201</span><span>202</span><span>203</span><span>204</span></span><span class="meta"><span>166</span><span>167</span><span>168</span><span>169</span><span>170</span><span>171</span><span>172</span><span>173</span><span>174</span><span>175</span><span>176</span><span>177</span><span>178</span><span>179</span><span>180</span><span>181</span></span><code class="language-css">;
+  right:0px;
+  border: 1px rgba(0, 0, 0, 0) solid;
+  width: 32%;
+/* max-width: 75px; */
+  height: 50%;
+  padding: 100px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px #7a787800;
+  z-index: 1001;
+  align-self: start;
+  background-color: rgba(66, 110, 88, 0);
+  overflow-y: scroll ;
+  overflow-x: scroll;
+}
+.window1::-webkit-scrollbar</code><span class="cl"></span></pre></div></section><a name="json"></a><h1 class="content-subhead">json</h1><div class="mode-stats"><p><span class="mode-rate">0%</span> Total files: 3, total lines of code: 87, duplicated lines: 0<a class="top" href="#top">[Top ↑↑↑]</a></p></div><a name="important"></a><h1 class="content-subhead">important</h1><div class="mode-stats"><p><span class="mode-rate">0%</span> Total files: 1, total lines of code: 63, duplicated lines: 0<a class="top" href="#top">[Top ↑↑↑]</a></p></div><a name="markdown"></a><h1 class="content-subhead">markdown</h1><div class="mode-stats"><p><span class="mode-rate">0%</span> Total files: 1, total lines of code: 67, duplicated lines: 0<a class="top" href="#top">[Top ↑↑↑]</a></p></div></div><div class="footer"><p>© 2013-2018 jscpd, copy/paste detector</p></div></div></div><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-730549-17"></script><script>window.dataLayer = window.dataLayer || [];
 function gtag() {
   dataLayer.push(arguments);
 }
