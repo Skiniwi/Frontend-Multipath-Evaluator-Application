@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/Frontend-Multipath-Evaluator-Application/static/css/main.e9666de5.chunk.css",
+    "main.js": "/Frontend-Multipath-Evaluator-Application/static/js/main.f7b59c14.chunk.js",
+    "main.js.map": "/Frontend-Multipath-Evaluator-Application/static/js/main.f7b59c14.chunk.js.map",
+    "runtime-main.js": "/Frontend-Multipath-Evaluator-Application/static/js/runtime-main.8d77dd85.js",
+    "runtime-main.js.map": "/Frontend-Multipath-Evaluator-Application/static/js/runtime-main.8d77dd85.js.map",
+    "static/js/2.e8fd3600.chunk.js": "/Frontend-Multipath-Evaluator-Application/static/js/2.e8fd3600.chunk.js",
+    "static/js/2.e8fd3600.chunk.js.map": "/Frontend-Multipath-Evaluator-Application/static/js/2.e8fd3600.chunk.js.map",
+    "index.html": "/Frontend-Multipath-Evaluator-Application/index.html",
+    "precache-manifest.d6442bf1f287ce21b006cf12348b9d1b.js": "/Frontend-Multipath-Evaluator-Application/precache-manifest.d6442bf1f287ce21b006cf12348b9d1b.js",
+    "service-worker.js": "/Frontend-Multipath-Evaluator-Application/service-worker.js",
+    "static/css/main.e9666de5.chunk.css.map": "/Frontend-Multipath-Evaluator-Application/static/css/main.e9666de5.chunk.css.map",
+    "static/js/2.e8fd3600.chunk.js.LICENSE.txt": "/Frontend-Multipath-Evaluator-Application/static/js/2.e8fd3600.chunk.js.LICENSE.txt",
+    "static/media/image.svg": "/Frontend-Multipath-Evaluator-Application/static/media/image.288b9272.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8d77dd85.js",
+    "static/js/2.e8fd3600.chunk.js",
+    "static/css/main.e9666de5.chunk.css",
+    "static/js/main.f7b59c14.chunk.js"
+  ]
+}
