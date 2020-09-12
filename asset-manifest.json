@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/Frontend-Multipath-Evaluator-Application/App/static/css/main.e9666de5.chunk.css",
-    "main.js": "/Frontend-Multipath-Evaluator-Application/App/static/js/main.b14487c5.chunk.js",
-    "main.js.map": "/Frontend-Multipath-Evaluator-Application/App/static/js/main.b14487c5.chunk.js.map",
-    "runtime-main.js": "/Frontend-Multipath-Evaluator-Application/App/static/js/runtime-main.aca1f564.js",
-    "runtime-main.js.map": "/Frontend-Multipath-Evaluator-Application/App/static/js/runtime-main.aca1f564.js.map",
-    "static/js/2.e227a622.chunk.js": "/Frontend-Multipath-Evaluator-Application/App/static/js/2.e227a622.chunk.js",
-    "static/js/2.e227a622.chunk.js.map": "/Frontend-Multipath-Evaluator-Application/App/static/js/2.e227a622.chunk.js.map",
-    "index.html": "/Frontend-Multipath-Evaluator-Application/App/index.html",
-    "precache-manifest.1bd9950a2e8fdbcc441871588bbc1e52.js": "/Frontend-Multipath-Evaluator-Application/App/precache-manifest.1bd9950a2e8fdbcc441871588bbc1e52.js",
-    "service-worker.js": "/Frontend-Multipath-Evaluator-Application/App/service-worker.js",
-    "static/css/main.e9666de5.chunk.css.map": "/Frontend-Multipath-Evaluator-Application/App/static/css/main.e9666de5.chunk.css.map",
-    "static/js/2.e227a622.chunk.js.LICENSE.txt": "/Frontend-Multipath-Evaluator-Application/App/static/js/2.e227a622.chunk.js.LICENSE.txt",
-    "static/media/image.svg": "/Frontend-Multipath-Evaluator-Application/App/static/media/image.288b9272.svg"
+    "main.css": "/Frontend-Multipath-Evaluator-Application/static/css/main.e9666de5.chunk.css",
+    "main.js": "/Frontend-Multipath-Evaluator-Application/static/js/main.04805a14.chunk.js",
+    "main.js.map": "/Frontend-Multipath-Evaluator-Application/static/js/main.04805a14.chunk.js.map",
+    "runtime-main.js": "/Frontend-Multipath-Evaluator-Application/static/js/runtime-main.aac46246.js",
+    "runtime-main.js.map": "/Frontend-Multipath-Evaluator-Application/static/js/runtime-main.aac46246.js.map",
+    "static/js/2.e227a622.chunk.js": "/Frontend-Multipath-Evaluator-Application/static/js/2.e227a622.chunk.js",
+    "static/js/2.e227a622.chunk.js.map": "/Frontend-Multipath-Evaluator-Application/static/js/2.e227a622.chunk.js.map",
+    "index.html": "/Frontend-Multipath-Evaluator-Application/index.html",
+    "precache-manifest.f4640a150eb6492cb9e115b7c51ae7ea.js": "/Frontend-Multipath-Evaluator-Application/precache-manifest.f4640a150eb6492cb9e115b7c51ae7ea.js",
+    "service-worker.js": "/Frontend-Multipath-Evaluator-Application/service-worker.js",
+    "static/css/main.e9666de5.chunk.css.map": "/Frontend-Multipath-Evaluator-Application/static/css/main.e9666de5.chunk.css.map",
+    "static/js/2.e227a622.chunk.js.LICENSE.txt": "/Frontend-Multipath-Evaluator-Application/static/js/2.e227a622.chunk.js.LICENSE.txt",
+    "static/media/image.svg": "/Frontend-Multipath-Evaluator-Application/static/media/image.288b9272.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.aca1f564.js",
+    "static/js/runtime-main.aac46246.js",
     "static/js/2.e227a622.chunk.js",
     "static/css/main.e9666de5.chunk.css",
-    "static/js/main.b14487c5.chunk.js"
+    "static/js/main.04805a14.chunk.js"
   ]
 }
